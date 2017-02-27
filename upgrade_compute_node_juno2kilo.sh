@@ -32,14 +32,14 @@ apt-get update
 apt-get install -y crudini
 
 echo "Upgrade nova and neutron packages"
-apt-get -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" upgrade -y || exit 2
-apt-get -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" install -y nova-compute sysfsutils || exit 3
-apt-get -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" install -y neutron-plugin-linuxbridge-agent conntrack || exit 4
+apt-get -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" upgrade -y 
+apt-get -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" install -y nova-compute sysfsutils 
+apt-get -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" install -y neutron-plugin-linuxbridge-agent conntrack 
 
 
 # Update nova.conf
-# echo "Setting Nova compute level to Juno"
-# crudini --set /etc/nova/nova.conf upgrade_levels compute juno
+echo "Setting Nova compute level to Juno"
+crudini --set /etc/nova/nova.conf upgrade_levels compute juno
 
 
 # Update neutron.conf
