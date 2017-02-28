@@ -29,9 +29,9 @@ service ceilometer-agent-compute stop
 
 # Install Kilo repository
 echo "Updating APT repository..."
-apt-get install -y software-properties-common
 rm /etc/apt/sources.list.d/ubuntu-cloud-archive.list 
 apt-get update
+apt-get install -y software-properties-common
 add-apt-repository -y cloud-archive:kilo
 apt-get update
 apt-get install -y crudini
