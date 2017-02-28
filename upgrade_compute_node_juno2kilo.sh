@@ -20,6 +20,7 @@ for i in nova neutron ceilometer; \
 ## Ad-hoc commands for our infra
 sed -i '/puppetlabs/d' /etc/apt/sources.list
 apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E84AC2C0460F3994
+apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 7F438280EF8D349F
 ####
 # Stop OpenStack services 
 echo "Stopping OpenStack service..."
