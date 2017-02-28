@@ -17,6 +17,10 @@ for i in nova neutron ceilometer; \
    do cp -r /etc/$i/* /var/lib/backups/openstack/$i-juno/; \
    done
 
+## Ad-hoc commands for our infra
+sed -i '/puppetlabs/d' /etc/apt/sources.list
+apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E84AC2C0460F3994
+####
 # Stop OpenStack services 
 echo "Stopping OpenStack service..."
 service nova-compute stop
