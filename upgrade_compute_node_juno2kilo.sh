@@ -72,7 +72,7 @@ echo "Upgrading CEILOMETER service..."
 apt-get -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" install -y ceilometer-agent-compute ceilometer-common python-ceilometer python-ceilometerclient
 
 # Restart service 
-echo "Restarting Ceilometer service..."
-service ceilometer-agent-compute restart
+#echo "Restarting Ceilometer service..."
+#service ceilometer-agent-compute restart
 
 echo "End of COMPUTE NODE update process!"
