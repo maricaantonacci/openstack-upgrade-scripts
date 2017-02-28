@@ -58,7 +58,7 @@ crudini --set /etc/neutron/api-paste.ini filter:catch_errors paste.filter_factor
 
 echo "Upgrading system packages..."
 apt-get -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" upgrade -y
-apt-get autoremove -y
+#apt-get autoremove -y
 #
 
 # Restart service
@@ -68,7 +68,7 @@ service neutron-plugin-linuxbridge-agent restart
 
 # Upgrade CEILOMETER service
 echo "Upgrading CEILOMETER service..."
-apt-get install ceilometer-agent-compute ceilometer-common python-ceilometer python-ceilometerclient
+apt-get -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" install -y ceilometer-agent-compute ceilometer-common python-ceilometer python-ceilometerclient
 
 # Restart service 
 echo "Restarting Ceilometer service..."
