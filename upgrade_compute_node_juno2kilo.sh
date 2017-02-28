@@ -3,6 +3,9 @@
 # Upgrade OpenStack Compute Node from Juno to Kilo
 #
 
+#clean 
+apt-get -y autoremove
+
 echo "Upgrade OpenStack Compute Node from Juno to Kilo"
 
 # Create backup directories
