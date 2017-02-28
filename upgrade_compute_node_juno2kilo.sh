@@ -26,15 +26,16 @@ service ceilometer-agent-compute stop
 # Install Kilo repository
 echo "Updating APT repository..."
 apt-get install -y software-properties-common
-add-apt-repository -y --remove cloud-archive:juno
+rm /etc/apt/sources.list.d/ubuntu-cloud-archive.list 
+apt-get update
 add-apt-repository -y cloud-archive:kilo
 apt-get update
 apt-get install -y crudini
 
 echo "Upgrade nova and neutron packages"
 apt-get -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" upgrade -y 
-apt-get -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" install -y nova-compute sysfsutils 
-apt-get -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" install -y neutron-plugin-linuxbridge-agent conntrack 
+apt-get -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" install --only-upgrade -y nova-compute sysfsutils 
+apt-get -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" install --only-upgrade -y neutron-plugin-linuxbridge-agent conntrack 
 
 
 # Update nova.conf
@@ -51,6 +52,11 @@ echo "Updating api-paste.ini"
 crudini --set /etc/neutron/api-paste.ini filter:request_id paste.filter_factory oslo.middleware:RequestId.factory
 crudini --set /etc/neutron/api-paste.ini filter:catch_errors paste.filter_factory oslo.middleware:CatchErrors.factory
 
+echo "Upgrading system packages..."
+apt-get -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" upgrade -y
+apt-get autoremove -y
+#
+
 # Restart service
 echo "Restarting Nova and Neutron services..."
 service nova-compute restart
@@ -63,10 +69,5 @@ apt-get install ceilometer-agent-compute ceilometer-common python-ceilometer pyt
 # Restart service 
 echo "Restarting Ceilometer service..."
 service ceilometer-agent-compute restart
-
-echo "Upgrading system packages..."
-apt-get -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" upgrade -y
-apt-get autoremove -y
-#
 
 echo "End of COMPUTE NODE update process!"
