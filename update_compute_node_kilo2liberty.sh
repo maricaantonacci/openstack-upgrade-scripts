@@ -3,6 +3,8 @@
 apt-get install -y software-properties-common
 add-apt-repository -y --remove cloud-archive:kilo
 add-apt-repository -y cloud-archive:liberty
+## Ad-hoc commands for our infra
+apt-key adv --keyserver keyserver.ubuntu.com --recv-keys  7F438280EF8D349F
 apt-get update || exit 1
 apt-get install -y crudini
 
